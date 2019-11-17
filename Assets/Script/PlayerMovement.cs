@@ -16,28 +16,37 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
     [Space]
 
-    float horizontalMove = 0f;
+    //float horizontalMove = 0f;
     bool jump = false;
 
+    void Start()
+    {
+
+    }
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
-        if (Input.GetButtonDown("Jump") && CharacterController2D.instance.jumpNumber <= CharacterController2D.instance.maxJumpNumber)
+        if (!GameManager.instance.playerDead)//NEW========================================
         {
-            jump = true;
-            animator.SetBool("IsJumping", true);
+            GameManager.instance.horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(GameManager.instance.horizontalMove));
+
+            if (Input.GetButtonDown("Jump") && CharacterController2D.instance.jumpNumber <= CharacterController2D.instance.maxJumpNumber)
+            {
+                jump = true;
+                animator.SetBool("IsJumping", true);
+            }
         }
     }
 
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-        jump = false;
+        if (!GameManager.instance.playerDead)
+        {
+            controller.Move(GameManager.instance.horizontalMove * Time.fixedDeltaTime, jump);
+            jump = false;
+        }
     }
 
 

@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PitController : MonoBehaviour{
+public class CheckpointController : MonoBehaviour
+{
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
+            GameManager.instance.checkpointPosition = gameObject.transform.position;
         }
     }
 }
