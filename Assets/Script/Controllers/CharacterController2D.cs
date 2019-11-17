@@ -23,11 +23,6 @@ public class CharacterController2D : MonoBehaviour
     public int jumpNumber;
     public int maxJumpNumber;
 
-    [Header("Player collision")]
-    public Collider2D bodyCollider;
-    public Collider2D legCollider;
-    [Space]
-
     [Header("Events")]
     [Space]
 

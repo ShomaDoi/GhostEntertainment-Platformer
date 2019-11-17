@@ -10,13 +10,11 @@ public class ChestController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") & !alreadyOpen)
-            if (GameManager.instance.lives < GameManager.instance.hearts.Length)
+            if (GameManager.instance.lives < GameManager.instance.maxPlayerLives)
             {
-                {
-                    animator.SetBool("isOpen", true);
-                    alreadyOpen = true;
-                    GameManager.instance.addLife();
-                }
+                alreadyOpen = true;
+                animator.SetBool("isOpen", true);
+                GameManager.instance.AddLife();
             }
 
     }

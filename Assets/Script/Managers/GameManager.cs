@@ -11,7 +11,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Player")]
     public GameObject player;
+    public GameObject[] hearts;
+    public int maxPlayerLives;
+
+
+    [HideInInspector]
+    public int lives;
+    [HideInInspector]
+    public bool playerDead;
+
     [Space]
 
     [HideInInspector]
@@ -22,14 +32,7 @@ public class GameManager : MonoBehaviour
     public Text coinText;
     [HideInInspector]
     public int coinCount;
-
-    [HideInInspector]
-    public int lives;
-    [HideInInspector]
-    public bool playerDead;
-
-    [Header("Player lives")]
-    public GameObject[] hearts;
+    
 
     [Header("Game over text")]
     public Text gameOverText;
@@ -39,17 +42,20 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float horizontalMove = 0f;
 
+
     void Start()
     {
         instance = this;
         checkpointPosition = player.gameObject.transform.position;
-        lives = hearts.Length;
+
+        lives = maxPlayerLives;
+
         gameOverText.gameObject.SetActive(false);
         playerDead = false;
     }
 
-    //NEW=CODE=BLOCK=================================
-    public void playerLives()
+
+    public void PlayerLife()
     {
         for (int i = 0; i < hearts.Length; i++)
         {
@@ -60,33 +66,34 @@ public class GameManager : MonoBehaviour
             hearts[i].SetActive(true);
         }
     }
-    public void subtractLife()
+
+
+    public void SubtractLife()
     {
-        Debug.Log("Life subtracted");
-        if (lives == 0)
+        lives--;
+        PlayerLife();
+
+        if (lives <= 0)
         {
-            gameOver();
-        }
-        else
-        {
-            lives--;
-            playerLives();
+            GameOver();
         }
     }
 
-    public void addLife()
+
+    public void AddLife()
     {
-        if(lives < hearts.Length) 
+        if(lives < maxPlayerLives) 
         {
             lives++;
-            playerLives();
+            PlayerLife();
         }
     }
-    public void gameOver() 
+
+
+    public void GameOver() 
     {
         playerDead = true;
         Destroy(player);
         gameOverText.gameObject.SetActive(true);
     }
-    //NEW=CODE=BLOCK=END=============================
 }
