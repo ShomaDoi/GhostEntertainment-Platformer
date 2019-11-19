@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PitController : MonoBehaviour{
-
-    public GameObject player;
-     void Start()
-     {
-        /*Collider2D toIgnore = player.GetComponents<Collider2D>()[1];
-        Physics2D.IgnoreCollision(toIgnore, this.GetComponent<Collider2D>());*/
+public class PitController : MonoBehaviour
+{
+    private void Start()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), PlayerMovement.instace.legCollider);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") & this.GetComponent<Collider2D>().bounds.Intersects(player.GetComponents<Collider2D>()[0].bounds))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Fall");
-                GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
-                GameManager.instance.subtractLife();
+            GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
+            GameManager.instance.SubtractLife();
         }
     }
 }

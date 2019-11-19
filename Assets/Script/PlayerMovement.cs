@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instace;
+
     [Header("Controller script")]
     public CharacterController2D controller;
     [Space]
@@ -16,13 +18,18 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
     [Space]
 
+    [Header("Player Colliders")]
+    public Collider2D legCollider;
+
     //float horizontalMove = 0f;
     bool jump = false;
 
+
     void Start()
     {
-
+        instace = this;
     }
+
 
     void Update()
     {
