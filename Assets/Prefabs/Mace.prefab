@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorPoint: {fileID: 4501158575106182280}
   rotateSpeed: 200
+  player: {fileID: 1872290648640851027, guid: 9186ecd50462791468bf73ec0fc5b12b, type: 3}
 --- !u!1 &4501158575106182280
 GameObject:
   m_ObjectHideFlags: 0
