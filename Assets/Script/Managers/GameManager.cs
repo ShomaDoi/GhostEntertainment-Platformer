@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         lives = maxPlayerLives;
 
-        gameOverText.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
         playerDead = false;
     }
 
@@ -97,11 +97,13 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     {
         playerDead = true;
-        Destroy(player);
         gameOverMenu.gameObject.SetActive(true);
+        Destroy(player);
+        
     }
 
-    public void ButtonClick()//NEW==========================================================
+
+    public void ButtonClick()
     {
         GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
 
@@ -111,8 +113,9 @@ public class GameManager : MonoBehaviour
             {
                 switch (i)
                 {
-                    case 0://jos uvek ne radi nista ali verujem da ce trebati za dalje
+                    case 0:
                         {
+                            Debug.LogWarning("Non line code here !");
                             break;
                         }
 

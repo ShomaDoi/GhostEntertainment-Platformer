@@ -9,7 +9,7 @@ public class CoinController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.instance.coinCount++;
-            Debug.Log("Coins: " + GameManager.instance.coinCount);
+            //Debug.Log("Coins: " + GameManager.instance.coinCount);
             GameManager.instance.coinText.text = GameManager.instance.coinCount.ToString();
             Destroy(gameObject);
         }
