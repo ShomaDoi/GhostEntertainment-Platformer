@@ -61,7 +61,6 @@
      <Compile Include="Assets\Script\Controllers\PitController.cs" />
      <Compile Include="Assets\Script\Controllers\PlatformController.cs" />
      <Compile Include="Assets\Script\Managers\GameManager.cs" />
-     <Compile Include="Assets\Script\Managers\MenuManager.cs" />
      <Compile Include="Assets\Script\PlayerMovement.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Vladan/Desktop/GhostEntertainment-Platformer/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
