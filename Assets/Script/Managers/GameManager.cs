@@ -32,16 +32,20 @@ public class GameManager : MonoBehaviour
     public Text coinText;
     [HideInInspector]
     public int coinCount;
-    
 
-    [Header("Game over text")]
+
+    [Header("Game over screen")]
+    public GameObject gameOverMenu;
     public Text gameOverText;
+    public Button[] buttons;
 
     public GameObject background;
 
     [HideInInspector]
     public float horizontalMove = 0f;
 
+    public float platforms_Moving_Speed;
+    public bool platformsTo_StartPosition = false;
 
     void Start()
     {
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         lives = maxPlayerLives;
 
-        gameOverText.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
         playerDead = false;
     }
 
@@ -93,7 +97,35 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     {
         playerDead = true;
+        gameOverMenu.gameObject.SetActive(true);
         Destroy(player);
-        gameOverText.gameObject.SetActive(true);
+        
+    }
+
+
+    public void ButtonClick()
+    {
+        GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttonClicked == buttons[i].gameObject)
+            {
+                switch (i)
+                {
+                    case 0:
+                        {
+                            Debug.LogWarning("Non line code here !");
+                            break;
+                        }
+
+                    case 1:
+                        {
+                            SceneManager.LoadScene(0);
+                            break;
+                        }
+                }
+            }
+        }
     }
 }
