@@ -57,7 +57,9 @@
      <Compile Include="Assets\Script\Controllers\CheckpointController.cs" />
      <Compile Include="Assets\Script\Controllers\ChestController.cs" />
      <Compile Include="Assets\Script\Controllers\CoinController.cs" />
+     <Compile Include="Assets\Script\Controllers\EnemyController.cs" />
      <Compile Include="Assets\Script\Controllers\PitController.cs" />
+     <Compile Include="Assets\Script\Controllers\PlatformController.cs" />
      <Compile Include="Assets\Script\Managers\GameManager.cs" />
      <Compile Include="Assets\Script\PlayerMovement.cs" />
  <Reference Include="Unity.Timeline.Editor">

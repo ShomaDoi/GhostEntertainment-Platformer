@@ -32,16 +32,20 @@ public class GameManager : MonoBehaviour
     public Text coinText;
     [HideInInspector]
     public int coinCount;
-    
 
-    [Header("Game over text")]
+
+    [Header("Game over screen")]
+    public GameObject gameOverMenu;
     public Text gameOverText;
+    public Button[] buttons;
 
     public GameObject background;
 
     [HideInInspector]
     public float horizontalMove = 0f;
 
+    public float platforms_Moving_Speed;
+    public bool platformsTo_StartPosition = false;
 
     void Start()
     {
@@ -94,6 +98,31 @@ public class GameManager : MonoBehaviour
     {
         playerDead = true;
         Destroy(player);
-        gameOverText.gameObject.SetActive(true);
+        gameOverMenu.gameObject.SetActive(true);
+    }
+
+    public void ButtonClick()//NEW==========================================================
+    {
+        GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttonClicked == buttons[i].gameObject)
+            {
+                switch (i)
+                {
+                    case 0://jos uvek ne radi nista ali verujem da ce trebati za dalje
+                        {
+                            break;
+                        }
+
+                    case 1:
+                        {
+                            SceneManager.LoadScene(0);
+                            break;
+                        }
+                }
+            }
+        }
     }
 }
