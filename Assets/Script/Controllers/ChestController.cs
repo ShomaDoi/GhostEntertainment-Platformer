@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChestController : MonoBehaviour
 {
     public Animator animator;
-    public bool alreadyOpen = false;
+    private bool alreadyOpen = false;
 
     void OnTriggerEnter2D(Collider2D collision)
     {

@@ -34,16 +34,19 @@ public class GameManager : MonoBehaviour
     public int coinCount;
 
 
-    [Header("Game over screen")]
-    public GameObject gameOverMenu;
-    public Text gameOverText;
+    [Header("Ingame UI elements")] //NEW======================
+    public GameObject[] inGameMenus;
     public Button[] buttons;
+    public GameObject gameUI;
+    [Space]
+
 
     public GameObject background;
 
     [HideInInspector]
     public float horizontalMove = 0f;
 
+    [Header("Platforms")]
     public float platforms_Moving_Speed;
     public bool platformsTo_StartPosition = false;
 
@@ -54,7 +57,10 @@ public class GameManager : MonoBehaviour
 
         lives = maxPlayerLives;
 
-        gameOverText.gameObject.SetActive(false);
+        for (int i = 0; i < inGameMenus.Length; i++) //NEW======================
+        {
+            inGameMenus[i].SetActive(false);
+        }
         playerDead = false;
     }
 
@@ -86,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void AddLife()
     {
-        if(lives < maxPlayerLives) 
+        if (lives < maxPlayerLives)
         {
             lives++;
             PlayerLife();
@@ -94,14 +100,16 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void GameOver() 
+    public void GameOver()
     {
         playerDead = true;
+        inGameMenus[0].gameObject.SetActive(true);
         Destroy(player);
-        gameOverMenu.gameObject.SetActive(true);
+
     }
 
-    public void ButtonClick()//NEW==========================================================
+
+    public void ButtonClick()//NEW======================
     {
         GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
 
@@ -111,14 +119,34 @@ public class GameManager : MonoBehaviour
             {
                 switch (i)
                 {
-                    case 0://jos uvek ne radi nista ali verujem da ce trebati za dalje
+                    case 0:
                         {
+                            SceneManager.LoadScene(0);
                             break;
                         }
 
                     case 1:
                         {
                             SceneManager.LoadScene(1);
+                            break;
+                        }
+                    case 2:
+                        {
+                            Time.timeScale = 0;
+                            inGameMenus[1].gameObject.SetActive(true);
+                            gameUI.gameObject.SetActive(false);
+                            break;
+                        }
+                    case 3:
+                        {
+                            SceneManager.LoadScene(0);
+                            break;
+                        }
+                    case 4:
+                        {
+                            Time.timeScale = 1;
+                            inGameMenus[1].gameObject.SetActive(false);
+                            gameUI.gameObject.SetActive(true);
                             break;
                         }
                 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     [Header("Platforms")]
-    public Vector2[] platformDestination;
+    public Transform[] platformDestination;
     private int arrayLength;
 
     private bool platformArrayState = false;
@@ -20,8 +20,6 @@ public class PlatformController : MonoBehaviour
     private Vector2 currentPosition;
     public bool waitPlayer;
 
-    [HideInInspector]
-    public bool boxPlatforms = false;
 
 
     void Start()
@@ -39,9 +37,9 @@ public class PlatformController : MonoBehaviour
     void Update()
     {
         currentPosition = this.transform.position;
-        if (platformArrayState && !boxPlatforms)
+        if (platformArrayState)
         {
-            if (currentPosition == platformDestination[arrayLength] && platformDestination.Length != 1)
+            if (currentPosition == new Vector2(platformDestination[arrayLength].position.x, platformDestination[arrayLength].position.y) && platformDestination.Length != 1)
             {
                 Timer += Time.deltaTime;
 
@@ -51,9 +49,9 @@ public class PlatformController : MonoBehaviour
                     NewDestination();
                 }
             }
-            else if (currentPosition != platformDestination[arrayLength] && !platform_NeedToWait)
+            else if (currentPosition != new Vector2(platformDestination[arrayLength].position.x, platformDestination[arrayLength].position.y) && !platform_NeedToWait)
             {
-                transform.position = Vector2.MoveTowards(transform.position, platformDestination[arrayLength], GameManager.instance.platforms_Moving_Speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(platformDestination[arrayLength].position.x, platformDestination[arrayLength].position.y), GameManager.instance.platforms_Moving_Speed * Time.deltaTime);
             }
         }
         else if (currentPosition != startPosition)
@@ -78,11 +76,11 @@ public class PlatformController : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.parent = this.gameObject.transform;
+            collision.transform.parent = this.transform;
 
             if (platform_NeedToWait)
                 platform_NeedToWait = false;
@@ -90,7 +88,7 @@ public class PlatformController : MonoBehaviour
     }
 
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
