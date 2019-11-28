@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public int coinCount;
 
 
-    [Header("Ingame UI elements")] //NEW======================
+    [Header("In game UI elements")] //NEW======================
     public GameObject[] inGameMenus;
     public Button[] buttons;
     public GameObject gameUI;
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ButtonClick()//NEW======================
+    public void ButtonClick()
     {
         GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
 
