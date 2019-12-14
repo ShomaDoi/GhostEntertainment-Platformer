@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public Collider2D legCollider;
 
     //float horizontalMove = 0f;
-    bool jump = false;
+    [HideInInspector]
+    public bool jump = false;
 
 
     void Start()
