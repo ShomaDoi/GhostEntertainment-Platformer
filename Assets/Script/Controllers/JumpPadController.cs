@@ -10,6 +10,8 @@ public class JumpPadController : MonoBehaviour
     private bool shrink = false;
     private bool expand = false;
     private int changingShape;
+
+    public Animator animator;
     void Start()
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponents<Collider2D>()[1]);
@@ -20,25 +22,29 @@ public class JumpPadController : MonoBehaviour
         Vector2 temp = transform.localScale;
         if (shrink)
         {
-            this.transform.localScale = new Vector2(1f, 0.5f);
+            animator.SetBool("shrink", true);
+           // this.transform.localScale = new Vector2(1f, 0.5f);
             this.transform.Translate(new Vector2(0, -0.2f) * 3 * Time.deltaTime);
             changingShape++;
             transform.localScale = temp;
             if (changingShape == 5)
             {
                 shrink = false;
+                animator.SetBool("shrink", false);
                 expand = true;
+                animator.SetBool("expand", true);
                 changingShape = 0;
             }
         }
         if (expand)
         {
-            this.transform.localScale = new Vector2(1f, 1f);
+          //  this.transform.localScale = new Vector2(1f, 1f);
             this.transform.Translate(new Vector2(0, 0.2f) * 3 * Time.deltaTime);
             changingShape++;
             if (changingShape == 5)
-            {;
+            {
                 expand = false;
+                animator.SetBool("expand", false);
                 changingShape = 0;
             }
         }

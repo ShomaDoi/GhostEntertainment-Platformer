@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1035670468}
   jumpForce: 1000
+  animator: {fileID: 236200476}
 --- !u!95 &236200476
 Animator:
   serializedVersion: 3
@@ -225,7 +226,7 @@ Animator:
   m_GameObject: {fileID: 236200474}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 52e841cc5e997fd438f094f74dd7fbd9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d8d5c48d3c9efa418d89d935622720d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -317,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236200474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.36, y: -2.172, z: 0}
+  m_LocalPosition: {x: 8.34, y: -2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1838296372}
@@ -359,7 +360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 455, y: 181}
+  m_AnchoredPosition: {x: 404, y: 118.5}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &240591903
@@ -725,7 +726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -377.5, y: 171}
+  m_AnchoredPosition: {x: -327, y: 107}
   m_SizeDelta: {x: 100, y: 37.399994}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &519420028
@@ -3021,7 +3022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -445, y: 172.5}
+  m_AnchoredPosition: {x: -394.5, y: 108.5}
   m_SizeDelta: {x: 62.020004, y: 39.940002}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1742321364
@@ -4632,11 +4633,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1415952533}
     m_Modifications:
-    - target: {fileID: 6766826825106794504, guid: d60a6b19400bd894fbed529efb9a8915,
-        type: 3}
-      propertyPath: m_Name
-      value: Saw
-      objectReference: {fileID: 0}
     - target: {fileID: 6766826825106794505, guid: d60a6b19400bd894fbed529efb9a8915,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4691,6 +4687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766826825106794504, guid: d60a6b19400bd894fbed529efb9a8915,
+        type: 3}
+      propertyPath: m_Name
+      value: Saw
       objectReference: {fileID: 0}
     - target: {fileID: 6766826825106794506, guid: d60a6b19400bd894fbed529efb9a8915,
         type: 3}
@@ -4790,11 +4791,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1415952533}
     m_Modifications:
-    - target: {fileID: 7727851022672904305, guid: 38be2b2639b07144da663e4436ecd35d,
-        type: 3}
-      propertyPath: m_Name
-      value: PatrollingMace
-      objectReference: {fileID: 0}
     - target: {fileID: 7727851022672904306, guid: 38be2b2639b07144da663e4436ecd35d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4849,6 +4845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727851022672904305, guid: 38be2b2639b07144da663e4436ecd35d,
+        type: 3}
+      propertyPath: m_Name
+      value: PatrollingMace
       objectReference: {fileID: 0}
     - target: {fileID: 7727851021994928882, guid: 38be2b2639b07144da663e4436ecd35d,
         type: 3}
