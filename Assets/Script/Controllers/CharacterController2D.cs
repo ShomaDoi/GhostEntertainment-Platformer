@@ -5,7 +5,7 @@ public class CharacterController2D : MonoBehaviour
 {
     public static CharacterController2D instance;
 
-    public float m_JumpForce = 400f;                            // Amount of force added when the player jumps.
+    public float m_JumpForce = 150f;                            // Amount of force added when the player jumps.
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
     public Transform m_GroundCheck;                                             // A position marking where to check if the player is grounded.
