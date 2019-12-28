@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public int lives;
     [HideInInspector]
     public bool playerDead;
+    [HideInInspector]
+    public bool isPaused;
 
     [Space]
 
