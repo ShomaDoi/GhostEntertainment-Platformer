@@ -16,8 +16,10 @@ public class CharacterController2D : MonoBehaviour
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    public bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
+
+    public PlayerGrounded playerGrounded;
 
     [HideInInspector]
     public int jumpNumber;
@@ -43,19 +45,21 @@ public class CharacterController2D : MonoBehaviour
 
     private void LateUpdate()
     {
-        bool wasGrounded = m_Grounded;
-        m_Grounded = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius);
+        //bool wasGrounded = m_Grounded;
+        //m_Grounded = false;
+        //Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius);
 
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].gameObject != gameObject)
-            {
-                m_Grounded = true;
-                if (!wasGrounded)
-                    OnLandEvent.Invoke();
-            }
-        }
+        //for (int i = 0; i < colliders.Length; i++)
+        //{
+        //    if (colliders[i].gameObject != gameObject)
+        //    {
+        //        m_Grounded = true;
+        //        if (!wasGrounded && playerGrounded.isGrounded)
+        //            OnLandEvent.Invoke();
+        //    }
+        //}
+        if (playerGrounded.isGrounded)
+            OnLandEvent.Invoke();
     }
 
 

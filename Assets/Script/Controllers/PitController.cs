@@ -19,5 +19,9 @@ public class PitController : MonoBehaviour
             GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
         }
+        if (collision.gameObject.CompareTag("Crate"))
+        {
+            Destroy(collision);
+        }
     }
 }
