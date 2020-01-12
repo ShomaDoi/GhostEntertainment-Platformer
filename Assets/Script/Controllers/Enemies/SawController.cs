@@ -5,6 +5,12 @@ using UnityEngine;
 public class SawController : MonoBehaviour
 {
     public GameObject player;
+
+    public bool isStationary;
+    public float speed;
+
+    public Transform[] destination;
+    private int destinationLength;
     void Start()
     {
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponents<Collider2D>()[0]);
@@ -12,6 +18,22 @@ public class SawController : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.forward, Time.deltaTime * -100f);
+
+        if (!isStationary)//NEW+============================================================================
+        {
+            if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
+            {
+                destinationLength++;
+                if (destination.Length <= destinationLength)
+                {
+                    destinationLength = 0;
+                }
+            }
+            else if (new Vector2(this.transform.position.x, this.transform.position.y) != new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
