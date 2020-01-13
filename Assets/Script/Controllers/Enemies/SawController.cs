@@ -33,6 +33,11 @@ public class SawController : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
             }
+            if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[0].position.x, destination[0].position.y) ||
+                new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destination.Length-1].position.x, destination[destination.Length - 1].position.y))
+            {
+                Flip();
+            }
         }
     }
 
@@ -43,5 +48,12 @@ public class SawController : MonoBehaviour
             GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
         }
+    }
+
+    private void Flip()
+    {
+        Vector2 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
