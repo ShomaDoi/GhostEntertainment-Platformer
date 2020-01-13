@@ -7,6 +7,7 @@ TagManager:
   - EnemyTurnPoint
   - Ground
   - Crate
+  - JumpPad
   layers:
   - Default
   - TransparentFX

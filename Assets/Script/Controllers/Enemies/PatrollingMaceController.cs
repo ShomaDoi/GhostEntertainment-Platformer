@@ -15,6 +15,9 @@ public class PatrollingMaceController : MonoBehaviour
 
     private bool giveNewDestination = true;
 
+    private bool blockable = true;
+    private bool blocked = false;
+
 
     void Start()
     {
@@ -23,19 +26,22 @@ public class PatrollingMaceController : MonoBehaviour
 
     void Update()
     {
-        if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
+        if(blockable == true && blocked == false)
         {
-            Timer += Time.deltaTime;
-
-            if (Timer >= onDestination_WaitTimer && giveNewDestination)
+            if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
             {
-                giveNewDestination = false;
-                NewDestination();
+                Timer += Time.deltaTime;
+
+                if (Timer >= onDestination_WaitTimer && giveNewDestination)
+                {
+                    giveNewDestination = false;
+                    NewDestination();
+                }
             }
-        }
-        else if (new Vector2(this.transform.position.x, this.transform.position.y) != new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
-        {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
+            else if (new Vector2(this.transform.position.x, this.transform.position.y) != new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
+            }
         }
     }
 
@@ -55,6 +61,18 @@ public class PatrollingMaceController : MonoBehaviour
         {
             GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
+        }
+        if (collision.gameObject.CompareTag("Crate"))
+        {
+            blocked = true;    
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Crate"))
+        {
+            blocked = false;
         }
     }
 }

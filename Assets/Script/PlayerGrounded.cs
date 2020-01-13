@@ -8,7 +8,11 @@ public class PlayerGrounded : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(isGrounded == false)
+        if (collision.gameObject.CompareTag("JumpPad"))
+        {
+            collision.isTrigger = true;
+        }
+        else if(isGrounded == false)
         {
             CharacterController2D.instance.OnLandEvent.Invoke();
             isGrounded = true;
@@ -18,6 +22,11 @@ public class PlayerGrounded : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("JumpPad"))
+        {
+            collision.isTrigger = false;
+        }
+        else
         isGrounded = false;
     }
 }
