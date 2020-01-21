@@ -8,15 +8,12 @@ public class PatrollingMaceController : MonoBehaviour
     public Transform[] destination;
     public float speed;
 
-    private int destinationLength;
+    private int destinationLength = 0;
 
     private float Timer;
     private float onDestination_WaitTimer = 2f;
 
     private bool giveNewDestination = true;
-
-    private bool blockable = true;
-    private bool blocked = false;
 
 
     void Start()
@@ -26,8 +23,6 @@ public class PatrollingMaceController : MonoBehaviour
 
     void Update()
     {
-        if(blockable == true && blocked == false)
-        {
             if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
             {
                 Timer += Time.deltaTime;
@@ -42,7 +37,6 @@ public class PatrollingMaceController : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
             }
-        }
     }
 
     void NewDestination()
@@ -62,17 +56,9 @@ public class PatrollingMaceController : MonoBehaviour
             GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
         }
-        if (collision.gameObject.CompareTag("Crate"))
+        else
         {
-            blocked = true;    
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Crate"))
-        {
-            blocked = false;
+            NewDestination();
         }
     }
 }
