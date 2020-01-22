@@ -4,29 +4,22 @@ using UnityEngine;
 
 public class PlayerGrounded : MonoBehaviour
 {
+    public static PlayerGrounded instance;
+
     public bool isGrounded = true;
+
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("JumpPad"))
+        if (isGrounded == false && collision.CompareTag("Ground"))
         {
-            collision.isTrigger = true;
-        }
-        else if(isGrounded == false)
-        {
-            CharacterController2D.instance.OnLandEvent.Invoke();
+            PlayerMovement.instace.OnLanding();
             isGrounded = true;
         }
-        
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("JumpPad"))
-        {
-            collision.isTrigger = false;
-        }
-        else
-        isGrounded = false;
     }
 }

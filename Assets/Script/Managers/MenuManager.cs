@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+
+
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager instance;
@@ -14,6 +16,10 @@ public class MenuManager : MonoBehaviour
     [Header("Active panel")]
     public GameObject[] openPanel;
     public GameObject backgroundDetails;
+
+    public GameObject[] levelSelectPanels;
+    public GameObject[] levelSelectObjects;
+    public int activeLevelPanel;
 
     [Space]
 
@@ -49,6 +55,14 @@ public class MenuManager : MonoBehaviour
                         openPanel[j].SetActive(false);
                     }
                     openPanel[2].SetActive(true);
+
+                    for (int j = 1; j < levelSelectPanels.Length; j++)
+                    {
+                        levelSelectPanels[j].SetActive(false);
+                    }
+                    levelSelectPanels[0].SetActive(true);
+                    activeLevelPanel = 0;
+                    Debug.Log(activeLevelPanel);
                 }
                 else if (i == 1)
                 {
@@ -77,13 +91,57 @@ public class MenuManager : MonoBehaviour
             {
                 openPanel[2].SetActive(false);
                 openPanel[0].SetActive(true);
+                break;
+            }
+            else if (buttonClicked == levelSelect[1].gameObject)
+            {
+               activeLevelPanel++;
+               changeLevelPanel();
+               break;
+            }
+            else if (buttonClicked == levelSelect[2].gameObject)
+            {
+               activeLevelPanel--;
+               changeLevelPanel();
+               break;
             }
             else if (buttonClicked == levelSelect[i].gameObject)
             {
-                SceneManager.LoadScene(i);              
+               SceneManager.LoadScene(i);
+               break;
             }
         }
     }
+
+    
+
+    public void changeLevelPanel() //NEW=====================================
+    {
+        for (int i = 0; i < levelSelectPanels.Length; i++)
+        {
+            if (levelSelectPanels[i].activeInHierarchy)
+            {
+                levelSelectPanels[i].SetActive(false);
+            }
+        }
+        levelSelectPanels[activeLevelPanel].SetActive(true);
+
+
+        if (levelSelectPanels[0].activeInHierarchy)
+        {
+            levelSelectObjects[1].SetActive(false);
+        }
+        else if (levelSelectPanels[levelSelectPanels.Length-1].activeInHierarchy)
+        {
+            levelSelectObjects[0].SetActive(false);
+        }
+        else
+        {
+            levelSelectObjects[0].SetActive(true);
+            levelSelectObjects[1].SetActive(true);
+        }
+    }
+
 
 
     public void Settings()

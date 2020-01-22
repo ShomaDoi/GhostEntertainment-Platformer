@@ -25,10 +25,7 @@ public class CharacterController2D : MonoBehaviour
     public int jumpNumber;
     public int maxJumpNumber;
 
-    [Header("Events")]
-    [Space]
 
-    public UnityEvent OnLandEvent;
 
     [System.Serializable]
     public class BoolEvent : UnityEvent<bool> { }
@@ -38,28 +35,26 @@ public class CharacterController2D : MonoBehaviour
         instance = this;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
-        if (OnLandEvent == null)
-            OnLandEvent = new UnityEvent();
+       // if (OnLandEvent == null)
+        ////    OnLandEvent = new UnityEvent();
     }
 
 
     private void LateUpdate()
     {
-        //bool wasGrounded = m_Grounded;
-        //m_Grounded = false;
-        //Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius);
+        /*   bool wasGrounded = m_Grounded;
+           m_Grounded = false;
+           Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius);
 
-        //for (int i = 0; i < colliders.Length; i++)
-        //{
-        //    if (colliders[i].gameObject != gameObject)
-        //    {
-        //        m_Grounded = true;
-        //        if (!wasGrounded && playerGrounded.isGrounded)
-        //            OnLandEvent.Invoke();
-        //    }
-        //}
-        if (playerGrounded.isGrounded)
-            OnLandEvent.Invoke();
+           for (int i = 0; i < colliders.Length; i++)
+           {
+               if (colliders[i].gameObject != gameObject)
+               {
+                   m_Grounded = true;
+                   if (!wasGrounded && playerGrounded.isGrounded)
+                       OnLandEvent.Invoke();
+               }
+           }*/
     }
 
 
@@ -82,7 +77,7 @@ public class CharacterController2D : MonoBehaviour
 
             if (jumpNumber < maxJumpNumber && jump)
             {
-                m_Grounded = false;
+                playerGrounded.isGrounded = false;//OVO JE ZAJEBAVALO=======================================================
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0.0f);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce), ForceMode2D.Force);
                 jumpNumber++;

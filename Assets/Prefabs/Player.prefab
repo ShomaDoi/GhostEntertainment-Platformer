@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 7001816530912648320}
   m_Layer: 8
   m_Name: BottomCollider
-  m_TagString: Untagged
+  m_TagString: PlayerBottomCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

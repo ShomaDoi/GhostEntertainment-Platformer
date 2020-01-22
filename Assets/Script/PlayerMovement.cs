@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
         instace = this;
     }
 
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.05f);
+    }
+
 
     void Update()
     {
@@ -62,5 +67,6 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("IsJumping", false);
         CharacterController2D.instance.jumpNumber = 0;
+        Debug.Log("UnJump");
     }
 }
