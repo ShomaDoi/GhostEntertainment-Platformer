@@ -154,8 +154,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007422924, y: -0.08669639}
-  m_Size: {x: 0.38319492, y: 0.590713}
+  m_Offset: {x: -0.007422924, y: -0.076569684}
+  m_Size: {x: 0.38319492, y: 0.5704596}
   m_Direction: 0
 --- !u!70 &1872290648640851026
 CapsuleCollider2D:
@@ -212,22 +212,6 @@ MonoBehaviour:
   playerGrounded: {fileID: 7001816530912648320}
   jumpNumber: 0
   maxJumpNumber: 2
-  OnLandEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1872290648640851038}
-        m_MethodName: OnLanding
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!95 &1872290648640851035
 Animator:
   serializedVersion: 3

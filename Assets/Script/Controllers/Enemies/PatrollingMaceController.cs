@@ -11,7 +11,7 @@ public class PatrollingMaceController : MonoBehaviour
     private int destinationLength = 0;
 
     private float Timer;
-    private float onDestination_WaitTimer = 2f;
+    public float onDestination_WaitTimer = 2f;
 
     private bool giveNewDestination = true;
 
@@ -53,7 +53,6 @@ public class PatrollingMaceController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
         }
         else

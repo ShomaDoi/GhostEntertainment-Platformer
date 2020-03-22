@@ -23,7 +23,6 @@ public class ChainMaceController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
         }
     }

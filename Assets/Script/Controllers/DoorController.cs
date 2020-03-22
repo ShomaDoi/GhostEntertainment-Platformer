@@ -14,7 +14,7 @@ public class DoorController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.LevelCompleted();
+            GameManager.instance.DoubleWinnings();
         }
     }
 }

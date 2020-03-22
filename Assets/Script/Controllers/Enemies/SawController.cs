@@ -17,9 +17,9 @@ public class SawController : MonoBehaviour
     }
     void Update()
     {
-        transform.Rotate(Vector3.forward, Time.deltaTime * -100f);
+       transform.Rotate(Vector3.forward, Time.deltaTime * -100f);
 
-        if (!isStationary)//NEW+============================================================================
+    /*    if (!isStationary)//NEW+============================================================================
         {
             if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
             {
@@ -38,7 +38,7 @@ public class SawController : MonoBehaviour
             {
                 Flip();
             }
-        }
+        }*/
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -62,6 +62,7 @@
      <Compile Include="Assets\Script\Controllers\Enemies\PatrollingMaceController.cs" />
      <Compile Include="Assets\Script\Controllers\Enemies\SawController.cs" />
      <Compile Include="Assets\Script\Controllers\JumpPadController.cs" />
+     <Compile Include="Assets\Script\Controllers\LevelDoorController.cs" />
      <Compile Include="Assets\Script\Controllers\PitController.cs" />
      <Compile Include="Assets\Script\Controllers\PlatformController.cs" />
      <Compile Include="Assets\Script\Controllers\StarController.cs" />

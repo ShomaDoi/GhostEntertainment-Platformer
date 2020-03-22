@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject[] hearts;
     public int maxPlayerLives;
+    public Text livesRemaining;
 
 
     [HideInInspector]
@@ -50,6 +51,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameUI;
     [Space]
 
+    [Header("Ad panels")]
+    public GameObject anotherChance;
+    public GameObject doubleCoins;
+    //public Button[] addedButtons;
+    [Space]
 
     public GameObject background;
 
@@ -62,11 +68,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //Screen.SetResolution(1920, 1080, true); za snimanje
         instance = this;
         checkpointPosition = player.gameObject.transform.position;
         Time.timeScale = 1;
 
         lives = maxPlayerLives;
+        livesRemaining.text = lives.ToString();
 
         for (int i = 0; i < inGameMenus.Length; i++) //NEW======================
         {
@@ -78,14 +86,15 @@ public class GameManager : MonoBehaviour
 
     public void PlayerLife()
     {
-        for (int i = 0; i < hearts.Length; i++)
+        /*for (int i = 0; i < hearts.Length; i++)
         {
             hearts[i].SetActive(false);
         }
         for (int i = 0; i < lives; i++)
         {
             hearts[i].SetActive(true);
-        }
+        }*/
+        livesRemaining.text = lives.ToString();
     }
 
 
@@ -94,9 +103,14 @@ public class GameManager : MonoBehaviour
         lives--;
         PlayerLife();
 
+        if (lives > 0)
+        {
+            player.gameObject.transform.position = checkpointPosition;
+        }
+
         if (lives <= 0)
         {
-            GameOver();
+            Revive();
         }
     }
 
@@ -110,6 +124,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Revive()
+    {
+        gameUI.gameObject.SetActive(false);
+        anotherChance.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
 
     public void GameOver()
     {
@@ -119,7 +139,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void LevelCompleted()//NEW===================================================
+    public void DoubleWinnings()
+    {
+        gameUI.gameObject.SetActive(false);
+        doubleCoins.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void LevelCompleted()
     {
         stars = 1;
         if (lives == maxPlayerLives)
@@ -140,7 +166,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ButtonClick()//NEW======================
+    public void ButtonClick()
     {
         GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
 
@@ -189,6 +215,30 @@ public class GameManager : MonoBehaviour
                     case 6:
                         {
                             SceneManager.LoadScene(0);
+                            break;
+                        }
+                    case 7:
+                        {                         
+                            Debug.Log("Continue");
+                            break;
+                        }
+                    case 8:
+                        {
+                            anotherChance.gameObject.SetActive(false);
+                            GameOver();
+                            break;
+                        }
+                    case 9:
+                        {
+                            doubleCoins.gameObject.SetActive(false);
+                            Debug.Log("Coins doubled");
+                            LevelCompleted();
+                            break;
+                        }
+                    case 10:
+                        {
+                            doubleCoins.gameObject.SetActive(false);
+                            LevelCompleted();
                             break;
                         }
                 }

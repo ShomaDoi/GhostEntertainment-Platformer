@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumpPadController : MonoBehaviour
 {
     public GameObject player;
-    public float jumpForce = 300f;
+    public float jumpForce = 150f;
     private float timer;
     private bool shrink = false;
     private bool expand = false;
