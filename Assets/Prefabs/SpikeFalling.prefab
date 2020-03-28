@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efd7d56ec0d76748ab030ae2ec01b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1872290648640851027, guid: 9186ecd50462791468bf73ec0fc5b12b, type: 3}
   spike: {fileID: 8747073099696824714}
 --- !u!1 &8747073098917108592
 GameObject:

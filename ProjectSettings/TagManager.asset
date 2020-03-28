@@ -9,6 +9,8 @@ TagManager:
   - Crate
   - JumpPad
   - PlayerBottomCollider
+  - Spike
+  - Pit
   layers:
   - Default
   - TransparentFX

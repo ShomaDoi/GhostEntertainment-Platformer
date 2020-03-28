@@ -18,5 +18,9 @@ public class SpikeController : MonoBehaviour
             GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
         }
+        if (collision.gameObject.CompareTag("Pit"))
+        {
+            Destroy(this.transform.parent.gameObject);
+        }
     }
 }

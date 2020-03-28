@@ -17,6 +17,5 @@ public class FallingSpikeController : MonoBehaviour
             {
             spike.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
             }
-
     }
 }
