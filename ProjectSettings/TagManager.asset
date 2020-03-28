@@ -7,6 +7,10 @@ TagManager:
   - EnemyTurnPoint
   - Ground
   - Crate
+  - JumpPad
+  - PlayerBottomCollider
+  - Spike
+  - Pit
   layers:
   - Default
   - TransparentFX

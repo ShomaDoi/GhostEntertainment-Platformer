@@ -8,10 +8,10 @@ public class PatrollingMaceController : MonoBehaviour
     public Transform[] destination;
     public float speed;
 
-    private int destinationLength;
+    private int destinationLength = 0;
 
     private float Timer;
-    private float onDestination_WaitTimer = 2f;
+    public float onDestination_WaitTimer = 2f;
 
     private bool giveNewDestination = true;
 
@@ -23,20 +23,20 @@ public class PatrollingMaceController : MonoBehaviour
 
     void Update()
     {
-        if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
-        {
-            Timer += Time.deltaTime;
-
-            if (Timer >= onDestination_WaitTimer && giveNewDestination)
+            if (new Vector2(this.transform.position.x, this.transform.position.y) == new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
             {
-                giveNewDestination = false;
-                NewDestination();
+                Timer += Time.deltaTime;
+
+                if (Timer >= onDestination_WaitTimer && giveNewDestination)
+                {
+                    giveNewDestination = false;
+                    NewDestination();
+                }
             }
-        }
-        else if (new Vector2(this.transform.position.x, this.transform.position.y) != new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
-        {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
-        }
+            else if (new Vector2(this.transform.position.x, this.transform.position.y) != new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(destination[destinationLength].position.x, destination[destinationLength].position.y), speed * Time.deltaTime);
+            }
     }
 
     void NewDestination()
@@ -53,8 +53,11 @@ public class PatrollingMaceController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.player.transform.position = GameManager.instance.checkpointPosition;
             GameManager.instance.SubtractLife();
+        }
+        else
+        {
+            NewDestination();
         }
     }
 }

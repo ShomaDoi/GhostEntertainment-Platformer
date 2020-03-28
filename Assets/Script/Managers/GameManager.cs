@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject[] hearts;
     public int maxPlayerLives;
+    public Text livesRemaining;
 
 
     [HideInInspector]
@@ -34,7 +35,15 @@ public class GameManager : MonoBehaviour
     public Text coinText;
     [HideInInspector]
     public int coinCount;
+    
 
+    [Header("Stars")]
+    public GameObject[] endLevelStars;
+    [Space]
+
+    public bool starCollected = false;
+    public int stars = 0;
+    [HideInInspector]
 
     [Header("Ingame UI elements")] //NEW======================
     public GameObject[] inGameMenus;
@@ -42,6 +51,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameUI;
     [Space]
 
+    [Header("Ad panels")]
+    public GameObject anotherChance;
+    public GameObject doubleCoins;
+    //public Button[] addedButtons;
+    [Space]
 
     public GameObject background;
 
@@ -54,10 +68,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //Screen.SetResolution(1920, 1080, true); za snimanje
         instance = this;
         checkpointPosition = player.gameObject.transform.position;
+        Time.timeScale = 1;
 
         lives = maxPlayerLives;
+        livesRemaining.text = lives.ToString();
 
         for (int i = 0; i < inGameMenus.Length; i++) //NEW======================
         {
@@ -69,14 +86,15 @@ public class GameManager : MonoBehaviour
 
     public void PlayerLife()
     {
-        for (int i = 0; i < hearts.Length; i++)
+        /*for (int i = 0; i < hearts.Length; i++)
         {
             hearts[i].SetActive(false);
         }
         for (int i = 0; i < lives; i++)
         {
             hearts[i].SetActive(true);
-        }
+        }*/
+        livesRemaining.text = lives.ToString();
     }
 
 
@@ -85,9 +103,14 @@ public class GameManager : MonoBehaviour
         lives--;
         PlayerLife();
 
+        if (lives > 0)
+        {
+            player.gameObject.transform.position = checkpointPosition;
+        }
+
         if (lives <= 0)
         {
-            GameOver();
+            Revive();
         }
     }
 
@@ -101,6 +124,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Revive()
+    {
+        gameUI.gameObject.SetActive(false);
+        anotherChance.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
 
     public void GameOver()
     {
@@ -110,8 +139,34 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void DoubleWinnings()
+    {
+        gameUI.gameObject.SetActive(false);
+        doubleCoins.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void LevelCompleted()
+    {
+        stars = 1;
+        if (lives == maxPlayerLives)
+        {
+            stars++;
+        }
+        if (starCollected)
+        {
+            stars++;
+        }
+        for (int i = 0; i < stars; i++)
+        {
+            endLevelStars[i].SetActive(true);
+        }
+        inGameMenus[2].gameObject.SetActive(true);
+        gameUI.gameObject.SetActive(false);
+        Time.timeScale = 0;
+    }
 
-    public void ButtonClick()//NEW======================
+
+    public void ButtonClick()
     {
         GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
 
@@ -129,14 +184,14 @@ public class GameManager : MonoBehaviour
 
                     case 1:
                         {
-                            SceneManager.LoadScene(0);
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                             break;
                         }
                     case 2:
                         {
-                            Time.timeScale = 0;
                             inGameMenus[1].gameObject.SetActive(true);
                             gameUI.gameObject.SetActive(false);
+                            Time.timeScale = 0;
                             break;
                         }
                     case 3:
@@ -149,6 +204,41 @@ public class GameManager : MonoBehaviour
                             Time.timeScale = 1;
                             inGameMenus[1].gameObject.SetActive(false);
                             gameUI.gameObject.SetActive(true);
+                            break;
+                        }
+                    case 5:
+                        {
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+                            break;
+                            
+                        }
+                    case 6:
+                        {
+                            SceneManager.LoadScene(0);
+                            break;
+                        }
+                    case 7:
+                        {                         
+                            Debug.Log("Continue");
+                            break;
+                        }
+                    case 8:
+                        {
+                            anotherChance.gameObject.SetActive(false);
+                            GameOver();
+                            break;
+                        }
+                    case 9:
+                        {
+                            doubleCoins.gameObject.SetActive(false);
+                            Debug.Log("Coins doubled");
+                            LevelCompleted();
+                            break;
+                        }
+                    case 10:
+                        {
+                            doubleCoins.gameObject.SetActive(false);
+                            LevelCompleted();
                             break;
                         }
                 }

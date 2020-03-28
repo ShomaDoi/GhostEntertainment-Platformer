@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumpPadController : MonoBehaviour
 {
     public GameObject player;
-    public float jumpForce = 300f;
+    public float jumpForce = 150f;
     private float timer;
     private bool shrink = false;
     private bool expand = false;
@@ -51,7 +51,7 @@ public class JumpPadController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && PlayerMovement.instace.animator.GetBool("IsJumping"))
         {
             collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             collision.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
