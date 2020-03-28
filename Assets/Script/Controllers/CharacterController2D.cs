@@ -16,17 +16,16 @@ public class CharacterController2D : MonoBehaviour
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    public bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
+
+    public PlayerGrounded playerGrounded;
 
     [HideInInspector]
     public int jumpNumber;
     public int maxJumpNumber;
 
-    [Header("Events")]
-    [Space]
 
-    public UnityEvent OnLandEvent;
 
     [System.Serializable]
     public class BoolEvent : UnityEvent<bool> { }
@@ -36,26 +35,26 @@ public class CharacterController2D : MonoBehaviour
         instance = this;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
-        if (OnLandEvent == null)
-            OnLandEvent = new UnityEvent();
+       // if (OnLandEvent == null)
+        ////    OnLandEvent = new UnityEvent();
     }
 
 
     private void LateUpdate()
     {
-        bool wasGrounded = m_Grounded;
-        m_Grounded = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius);
+        /*   bool wasGrounded = m_Grounded;
+           m_Grounded = false;
+           Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius);
 
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].gameObject != gameObject)
-            {
-                m_Grounded = true;
-                if (!wasGrounded)
-                    OnLandEvent.Invoke();
-            }
-        }
+           for (int i = 0; i < colliders.Length; i++)
+           {
+               if (colliders[i].gameObject != gameObject)
+               {
+                   m_Grounded = true;
+                   if (!wasGrounded && playerGrounded.isGrounded)
+                       OnLandEvent.Invoke();
+               }
+           }*/
     }
 
 
@@ -78,7 +77,7 @@ public class CharacterController2D : MonoBehaviour
 
             if (jumpNumber < maxJumpNumber && jump)
             {
-                m_Grounded = false;
+                playerGrounded.isGrounded = false;//OVO JE ZAJEBAVALO=======================================================
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0.0f);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce), ForceMode2D.Force);
                 jumpNumber++;

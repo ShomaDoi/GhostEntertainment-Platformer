@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public int lives;
     [HideInInspector]
     public bool playerDead;
+    [HideInInspector]
+    public bool isPaused;
 
     [Space]
 
@@ -32,7 +34,15 @@ public class GameManager : MonoBehaviour
     public Text coinText;
     [HideInInspector]
     public int coinCount;
+    
 
+    [Header("Stars")]
+    public GameObject[] endLevelStars;
+    [Space]
+
+    public bool starCollected = false;
+    public int stars = 0;
+    [HideInInspector]
 
     [Header("Ingame UI elements")] //NEW======================
     public GameObject[] inGameMenus;
@@ -54,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         checkpointPosition = player.gameObject.transform.position;
+        Time.timeScale = 1;
 
         lives = maxPlayerLives;
 
@@ -108,6 +119,26 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LevelCompleted()//NEW===================================================
+    {
+        stars = 1;
+        if (lives == maxPlayerLives)
+        {
+            stars++;
+        }
+        if (starCollected)
+        {
+            stars++;
+        }
+        for (int i = 0; i < stars; i++)
+        {
+            endLevelStars[i].SetActive(true);
+        }
+        inGameMenus[2].gameObject.SetActive(true);
+        gameUI.gameObject.SetActive(false);
+        Time.timeScale = 0;
+    }
+
 
     public void ButtonClick()//NEW======================
     {
@@ -127,14 +158,14 @@ public class GameManager : MonoBehaviour
 
                     case 1:
                         {
-                            SceneManager.LoadScene(0);
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                             break;
                         }
                     case 2:
                         {
-                            Time.timeScale = 0;
                             inGameMenus[1].gameObject.SetActive(true);
                             gameUI.gameObject.SetActive(false);
+                            Time.timeScale = 0;
                             break;
                         }
                     case 3:
@@ -147,6 +178,17 @@ public class GameManager : MonoBehaviour
                             Time.timeScale = 1;
                             inGameMenus[1].gameObject.SetActive(false);
                             gameUI.gameObject.SetActive(true);
+                            break;
+                        }
+                    case 5:
+                        {
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+                            break;
+                            
+                        }
+                    case 6:
+                        {
+                            SceneManager.LoadScene(0);
                             break;
                         }
                 }

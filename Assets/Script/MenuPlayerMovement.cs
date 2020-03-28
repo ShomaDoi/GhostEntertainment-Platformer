@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class MenuPlayerMovement : MonoBehaviour
 {
-    public static PlayerMovement instace;
+    public Transform[] destination;
+    private Vector2 currentPosition;
 
     [Header("Controller script")]
     public CharacterController2D controller;
@@ -24,49 +25,28 @@ public class PlayerMovement : MonoBehaviour
     //float horizontalMove = 0f;
     [HideInInspector]
     public bool jump = false;
-
-
     void Start()
     {
-        instace = this;
+        
     }
-
-    public IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(0.05f);
-    }
-
-
     void Update()
     {
-        if (!GameManager.instance.playerDead)//NEW========================================
+     /*   currentPosition = this.transform.position;
+        if (currentPosition == new Vector2(destination[0].position.x, destination[0].position.y))
         {
-            GameManager.instance.horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
             animator.SetFloat("Speed", Mathf.Abs(GameManager.instance.horizontalMove));
-
-            if (Input.GetButtonDown("Jump") && CharacterController2D.instance.jumpNumber <= CharacterController2D.instance.maxJumpNumber)
-            {
-                jump = true;
-                animator.SetBool("IsJumping", true);
-            }
-        }
+        }*/
     }
-
 
     void FixedUpdate()
     {
-        if (!GameManager.instance.playerDead)
-        {
             controller.Move(GameManager.instance.horizontalMove * Time.fixedDeltaTime, jump);
             jump = false;
-        }
     }
 
 
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
-        CharacterController2D.instance.jumpNumber = 0;
-        Debug.Log("UnJump");
     }
 }
